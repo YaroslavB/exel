@@ -14,7 +14,7 @@ module.exports = {
     mode: "development",
     entry: ['@babel/polyfill','./index.js'],
     output: {
-        filename: "script.[hash].js",
+        filename: "script.js",
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
@@ -27,7 +27,9 @@ module.exports = {
     devtool: isDev ? 'source-map' : false,
     devServer: {
         port: 3000,
-        hot: isDev
+        hot: true,
+
+
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -40,11 +42,14 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                {from: path.resolve(__dirname, 'src/favicon.ico'), to: path.resolve(__dirname, 'dist'),}
+                {
+                    from: path.resolve(__dirname, 'src/favicon.ico'),
+                    to: path.resolve(__dirname, 'dist'),
+                }
             ]
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.[hash].css'
+            filename: 'style.css'
         })
     ],
     module: {
@@ -52,10 +57,7 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {},
-                    },
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
                 ],
