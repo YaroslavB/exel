@@ -1,3 +1,2 @@
 import './scss/index.scss'
-
-console.log('zaps');
+console.log('zaps')
