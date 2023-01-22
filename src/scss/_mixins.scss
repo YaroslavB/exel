@@ -10,10 +10,12 @@
   {
     font-size: 18px;
   }
+
   &:active, &.active
   {
     color: $color;
   }
+
   &:hover{
     cursor: pointer;
     background: #eee;
