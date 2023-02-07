@@ -6,16 +6,18 @@ export class Exel {
 
   getRoot() {
     const $root =document.createElement('div')
+    $root.classList.add('exel')
     this.components.forEach(Component => {
-      const component = new Component()
-      $root.insertAdjacentHTML('beforeend', component.toHtml())
+      const $el = document.createElement('div')
+      $el.classList.add(Component.className)
+      const component = new Component($el)
+      $el.innerHTML = component.toHtml()
+      $root.append($el)
     })
     return $root
   }
 
   render() {
-    // console.log(this.$el)
-    // this.$el.insertAdjacentHTML('afterbegin', `<h1>Test</h1>`)
     this.$el.append(this.getRoot())
   }
 }
