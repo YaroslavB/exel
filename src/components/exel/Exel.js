@@ -1,3 +1,5 @@
+import {$} from '@core/Dom';
+
 export class Exel {
   constructor(selector, options) {
     this.$el=document.querySelector(selector)
@@ -5,16 +7,14 @@ export class Exel {
   }
 
   getRoot() {
-    const $root =document.createElement('div')
-    $root.classList.add('exel')
+    const root = $.create('div', 'exel')
     this.components.forEach(Component => {
-      const $el = document.createElement('div')
-      $el.classList.add(Component.className)
+      const $el = $.create('div', Component.className)
       const component = new Component($el)
       $el.innerHTML = component.toHtml()
-      $root.append($el)
+      root.append($el)
     })
-    return $root
+    return root
   }
 
   render() {
