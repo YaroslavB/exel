@@ -11,6 +11,17 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+  append(node) {
+    if (node instanceof Dom) {
+      node = node.$el
+    }
+    if (Element.prototype.append) {
+      this.$el.append(node)
+    } else {
+      this.$el.appendChild(node)
+    }
+    return this
+  }
 
   clear() {
     this.html('')
@@ -27,5 +38,5 @@ $.create = (tagName, classes)=>{
   if (classes) {
     el.classList.add(classes)
   }
-  return el
+  return $(el)
 }
