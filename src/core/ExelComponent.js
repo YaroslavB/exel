@@ -1,8 +1,14 @@
 import {DomListener} from './DomListener';
 
 export class ExelComponent extends DomListener {
-  // return template component
+  constructor($root, options ={}) {
+    super($root, options.listeners)
+  }
+
   toHtml() {
     return '';
+  }
+  init() {
+    this.initDomListeners()
   }
 }

@@ -1,4 +1,4 @@
-import {ExelComponent} from '../../core/ExelComponent';
+import {ExelComponent} from '@core/ExelComponent';
 
 export class Toolbar extends ExelComponent {
   static className ='exel__toolbar'
