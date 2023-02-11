@@ -9,6 +9,9 @@ export class DomListener {
 
   initDomListeners() {
     console.log(this.listeners)
+    this.listeners.forEach(listener =>{
+      console.log(listener)
+    })
   }
   removeDomListeners() {}
 }
