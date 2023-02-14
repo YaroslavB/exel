@@ -1,4 +1,4 @@
-import {ExelComponent} from '../../core/ExelComponent';
+import {ExelComponent} from '@core/ExelComponent';
 
 export class Header extends ExelComponent {
   static className ='exel__header'
