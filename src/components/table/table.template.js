@@ -1,3 +1,4 @@
+// charset codes from  firs and last A-Z
 const CODES ={
   A: 65,
   Z: 90,
