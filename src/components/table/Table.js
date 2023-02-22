@@ -6,23 +6,17 @@ export class Table extends ExelComponent {
 
   constructor($root) {
     super($root, {
-      listeners: ['click', 'mousedown', 'mousemove', 'mouseup'],
+      listeners: ['mousedown'],
     })
   }
 
   toHtml() {
     return createTable(120);
   }
-  onClick() {
-    console.log('click')
-  }
+
   onMousedown(event) {
-    console.log('mousedown', event.target)
-  }
-  onMousemove() {
-    console.log('mousemove')
-  }
-  onMouseup() {
-    console.log('mouseup')
+    if (event.target.dataset.resize) {
+      console.log(event.target.dataset.resize)
+    }
   }
 }
