@@ -1,9 +1,10 @@
 class Dom {
   constructor(selector) {
-    this.$el = typeof selector ==='string'?
-    document.querySelector(selector) :
-    selector
+    this.$el = typeof selector === 'string' ?
+            document.querySelector(selector) :
+            selector
   }
+
   html(html) {
     if (typeof html === 'string') {
       this.$el.innerHTML = html
@@ -11,6 +12,15 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCords() {
+    return this.$el.getBoundingClientRect()
+  }
+
   append(node) {
     if (node instanceof Dom) {
       node = node.$el
@@ -22,6 +32,7 @@ class Dom {
     }
     return this
   }
+
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback)
   }
@@ -40,7 +51,7 @@ export function $(selector) {
   return new Dom(selector);
 }
 
-$.create = (tagName, classes)=>{
+$.create = (tagName, classes) => {
   const el = document.createElement(tagName)
   if (classes) {
     el.classList.add(classes)

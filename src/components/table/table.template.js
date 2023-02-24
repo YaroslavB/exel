@@ -11,7 +11,7 @@ function toCell() {
 }
 // generate  new column
 function toColumn(col) {
-  return `<div class="column">
+  return `<div class="column" data-type="resize">
               ${col}
               <div class="col-resize" data-resize="col"></div>
           </div>`
@@ -41,6 +41,7 @@ export function createTable(rowsCount = 14) {
       .map(toChar)
       .map(toColumn)
       .join('')
+      .trim()
   rows.push(createRow(null, cols))
   for (let i = 0; i<rowsCount; i++) {
     const cells = new Array(colsCount)
