@@ -13,6 +13,10 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
 
+  get data() {
+    return this.$el.dataset
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector))
   }
@@ -44,6 +48,10 @@ class Dom {
   clear() {
     this.html('')
     return this
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
   }
 }
 
