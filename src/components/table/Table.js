@@ -27,12 +27,12 @@ export class Table extends ExelComponent {
         if (type === 'col') {
           const delta = e.pageX - coordinates.right
           const value = coordinates.width + delta
-          $parent.$el.style.width = value + 'px'
+          $parent.css({width: value + 'px'})
           cells.forEach(el => el.style.width = value + 'px')
         } else if (type === 'row') {
           const delta = e.pageY - coordinates.bottom
           const value = coordinates.height + delta
-          $parent.$el.style.height = value + 'px'
+          $parent.css({height: value + 'px'})
         }
       }
       document.onmouseup = () => {
