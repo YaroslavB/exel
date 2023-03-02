@@ -6,17 +6,24 @@ const CODES ={
 
 
 // eslint-disable-next-line no-unused-vars
-function toCell() {
-  return `<div class="cell" contenteditable></div>`
+function toCell(_, col) {
+  return `<div class="cell" contenteditable data-col="${col}"></div>`
 }
-
-function toColumn(col) {
-  return `<div class ="column">${col}</div>`
+// generate  new column
+function toColumn(col, index) {
+  return `<div class="column" data-type="resize" data-col="${index}">
+              ${col}
+              <div class="col-resize" data-resize="col"></div>
+          </div>`
 }
 
 function createRow(index, content) {
-  return `<div class="row" >
-                <div class="row-info">${index ? index:''}</div>
+  const resizer = index ? `<div class="row-resize" data-resize="row"></div>`:''
+  return `<div class="row" data-type="resize">
+                <div class="row-info">
+                    ${index ? index:''}
+                    ${resizer}
+                    </div>
                 <div class="row-data">${content}</div>
           </div>`
 }
@@ -34,12 +41,15 @@ export function createTable(rowsCount = 14) {
       .map(toChar)
       .map(toColumn)
       .join('')
+      .trim()
   rows.push(createRow(null, cols))
+
   for (let i = 0; i<rowsCount; i++) {
     const cells = new Array(colsCount)
         .fill('')
         .map(toCell)
         .join('')
+        .trim()
     rows.push(createRow(i+1, cells))
   }
   return rows.join('')
