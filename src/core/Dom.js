@@ -50,8 +50,19 @@ class Dom {
     return this
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
   findAll(selector) {
     return this.$el.querySelectorAll(selector)
+  }
+  addClass(selector) {
+    this.$el.classList.add(selector)
+  }
+
+  removeClass(selector) {
+    this.$el.classList.remove(selector)
   }
 
   css(styles = {}) {
