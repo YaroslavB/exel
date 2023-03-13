@@ -5,10 +5,19 @@ const CODES ={
 }
 
 
-// eslint-disable-next-line no-unused-vars
-function toCell(_, col) {
-  return `<div class="cell" contenteditable data-col="${col}"></div>`
+function toCell(row) {
+  return function(_, col) {
+    return `<div class="cell" 
+             contenteditable
+             data-col="${col}"
+             data-row="${row}"
+             data-type="cell"
+             data-id="${row}:${col}"
+             ></div>`
+  }
 }
+
+
 // generate  new column
 function toColumn(col, index) {
   return `<div class="column" data-type="resize" data-col="${index}">
@@ -44,13 +53,13 @@ export function createTable(rowsCount = 14) {
       .trim()
   rows.push(createRow(null, cols))
 
-  for (let i = 0; i<rowsCount; i++) {
+  for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colsCount)
         .fill('')
-        .map(toCell)
+        .map(toCell(row))
         .join('')
         .trim()
-    rows.push(createRow(i+1, cells))
+    rows.push(createRow(row+1, cells))
   }
   return rows.join('')
 }

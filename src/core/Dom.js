@@ -50,8 +50,19 @@ class Dom {
     return this
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
   findAll(selector) {
     return this.$el.querySelectorAll(selector)
+  }
+  addClass(selector) {
+    this.$el.classList.add(selector)
+  }
+
+  removeClass(selector) {
+    this.$el.classList.remove(selector)
   }
 
   css(styles = {}) {
@@ -60,6 +71,16 @@ class Dom {
         .forEach(key =>{
           this.$el.style[key]=styles[key]
         })
+  }
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      }
+    }
+    return this.data.id
   }
 }
 
