@@ -2,9 +2,9 @@ import {ExelComponent} from '@core/ExelComponent';
 import {createTable} from '@/components/table/table.template';
 import {resizeHandler} from '@/components/table/table.resize';
 import {isCell, shouldResize} from '@/components/table/table.functions';
-import {TableSelection} from './TableSelection';
+import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/Dom'
-import {matrix} from './table.functions';
+import {matrix} from '@/components/table/table.functions';
 
 export class Table extends ExelComponent {
   static className ='exel__table'

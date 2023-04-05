@@ -18,7 +18,7 @@
     "url": "https://github.com/YaroslavB/exel/issues"
   },
   "homepage": "https://github.com/YaroslavB/exel#readme",
-  "browserslist": "> 0.25%, not dead",
+  "browserslist": ["> 0.25%, not dead"],
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
