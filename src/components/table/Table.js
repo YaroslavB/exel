@@ -12,9 +12,11 @@ import {matrix} from '@/components/table/table.functions';
 export class Table extends ExelComponent {
   static className ='exel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
+      name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options,
     })
   }
 
@@ -30,6 +32,10 @@ export class Table extends ExelComponent {
     super.init()
     const cell = this.$root.find('[data-id="0:0"]')
     this.selection.select(cell)
+    this.observer.subscribe('test', text =>{
+      this.selection.current.text(text)
+      console.log('Table from formula text', text)
+    })
   }
 
   onMousedown(event) {

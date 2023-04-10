@@ -13,6 +13,10 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
 
+  text(text) {
+    this.$el.textContent = text
+  }
+
   get data() {
     return this.$el.dataset
   }
@@ -57,6 +61,7 @@ class Dom {
   findAll(selector) {
     return this.$el.querySelectorAll(selector)
   }
+
   addClass(selector) {
     this.$el.classList.add(selector)
   }
@@ -72,6 +77,7 @@ class Dom {
           this.$el.style[key]=styles[key]
         })
   }
+
   id(parse) {
     if (parse) {
       const parsed = this.id().split(':')

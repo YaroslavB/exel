@@ -3,10 +3,12 @@ import {ExelComponent} from '@core/ExelComponent';
 export class Formula extends ExelComponent {
   static className ='exel__formula'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input', 'click'],
+      listeners: ['input'],
+      ...options,
+
     })
   }
 
@@ -17,7 +19,7 @@ export class Formula extends ExelComponent {
   }
 
   onInput(event) {
-    console.log('block onInput', event.target.textContent.trim());
+    const text = event.target.textContent.trim()
+    this.observer.dispatch('test', text)
   }
-  onClick() {}
 }
