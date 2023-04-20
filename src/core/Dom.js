@@ -71,10 +71,12 @@ class Dom {
 
   addClass(selector) {
     this.$el.classList.add(selector)
+    return this
   }
 
   removeClass(selector) {
     this.$el.classList.remove(selector)
+    return this
   }
 
   css(styles = {}) {
