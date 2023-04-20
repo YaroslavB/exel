@@ -20,6 +20,6 @@ export class Formula extends ExelComponent {
 
   onInput(event) {
     const text = event.target.textContent.trim()
-    this.observer.dispatch('test', text)
+    this.$observ('formula:input', text)
   }
 }
