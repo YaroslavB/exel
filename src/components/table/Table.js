@@ -15,7 +15,7 @@ export class Table extends ExelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options,
     })
   }
@@ -30,14 +30,23 @@ export class Table extends ExelComponent {
 
   init() {
     super.init()
-    const cell = this.$root.find('[data-id="0:0"]')
-    this.selection.select(cell)
+    const $cell = this.$root.find('[data-id="0:0"]')
+    this.selectCell($cell)
 
     this.$on('formula:input', text =>{
       this.selection.current.text(text)
       console.log('Table from formula text', text)
     })
+    this.$on('formula:done', ()=>{
+      this.selection.current.focus()
+    })
   }
+
+  selectCell($cell) {
+    this.selection.select($cell)
+    this.$observ('table:select', $cell)
+  }
+
 
   onMousedown(event) {
     if (shouldResize(event)) {
@@ -71,8 +80,12 @@ export class Table extends ExelComponent {
       event.preventDefault()
       const id = this.selection.current.id(true)
       const $next = this.$root.find(nextSelector(key, id))
-      this.selection.select($next)
+      this.selectCell($next)
     }
+  }
+
+  onInput(event) {
+    this.$observ('table:input', $(event.target))
   }
 }
 

@@ -1,4 +1,5 @@
 import {ExelComponent} from '@core/ExelComponent';
+import {$} from '@core/Dom';
 
 export class Formula extends ExelComponent {
   static className ='exel__formula'
@@ -6,7 +7,7 @@ export class Formula extends ExelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options,
 
     })
@@ -15,11 +16,30 @@ export class Formula extends ExelComponent {
   toHtml() {
     return ' <div class="info">fx</div>\n' +
         // eslint-disable-next-line max-len
-        '<div class="input" contenteditable="true" spellcheck="false"></div>';
+        '<div id="formula" class="input" contenteditable="true" spellcheck="false"></div>';
+  }
+
+  init() {
+    super.init()
+    this.$formula = this.$root.find('#formula')
+    this.$on('table:select', $cell =>{
+      this.$formula.text($cell.text())
+    })
+
+    this.$on('table:input', $cell =>{
+      this.$formula.text($cell.text())
+    })
   }
 
   onInput(event) {
-    const text = event.target.textContent.trim()
-    this.$observ('formula:input', text)
+    this.$observ('formula:input', $(event.target).text())
+  }
+
+  onKeydown(event) {
+    const keys =['Enter', 'Tab']
+    if (keys.includes(event.key)) {
+      event.preventDefault()
+      this.$observ('formula:done')
+    }
   }
 }
